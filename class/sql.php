@@ -1,57 +1,43 @@
 <?php 
-
-class Sql extends PDO{   //PDO classe nativa do PHP
+class Sql extends PDO {
 
 	private $conn;
 
-
-	//Método Construtor de conexão com o banco
 	public function __construct(){
 
 		$this->conn = new PDO("mysql:host=localhost;dbname=dvphp7", "root", "");
 
 	}
 
-	//Método para setar os parametros da query
-	private function setParams($statment, $parameters = array()){
+	private function setParams($statement, $parameters = array()){
 
 		foreach ($parameters as $key => $value) {
-		
-			$this->setParam($key, $value);
-
+			
+			$this->setParam($statement, $key, $value);
 		}
+	}
+
+	private function setParam($statement, $key, $value){
+
+		$statement->bindParam($key, $value);
 
 	}
 
-	//Método para setar um único parâmetro
-	private function setParam($statment, $key, $value){
-
-		$statment->bindParam($key, $value);
-
-	}
-
-	//Método para montar uma Query com os parametros
-	public function query($rawQuery, $params = array()){   
+	public function query($rawQuery, $params = array()){
 
 		$stmt = $this->conn->prepare($rawQuery);
-
-		$this->setParam($stmt, $params);
-
+		$this->setParams($stmt, $params);
 		$stmt->execute();
-
 		return $stmt;
-
-	} 
-
-	//Método para um select
-	public function select($rawQuery, $params = array()):array{
-
-		$this->query($rawQuery, $params);
-
-		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	}
 
+	public function select($rawQuery, $params = array()):array
+
+	{
+		$stmt = $this->query($rawQuery, $params);
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
 }
 
  ?>
