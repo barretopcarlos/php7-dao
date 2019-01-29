@@ -6,20 +6,20 @@ require_once("config.php");
 //echo $root;
 
 
-//Carrega uma lista de usuários
-//$lista = Usuario::getList();
-//echo json_encode($lista);
+// Carrega uma lista de usuários
+// $lista = Usuario::getList();
+// echo json_encode($lista);
 
 
 //Carrega uma lista de usuários buscando pelo login
-//$search = Usuario::search("jo");
-//echo json_encode($search);
+// $search = Usuario::search("car");
+// echo json_encode($search);
 
 
 //carrega um usuário usando o login e a senha
-//$usuario = new Usuario();
-//$usuario->login("root", "!@#$");
-//echo $usuario;
+$usuario = new Usuario();
+$usuario->login("carlos", "querty1234");
+echo $usuario;
 
 /*
 
@@ -35,10 +35,11 @@ $usuario->loadById(8);
 $usuario->update("professor", "!@#$%¨&*");
 echo $usuario;
 */
+// echo "<br>";
+// echo "<br>";
 
-
-$usuario = new Usuario();
-$usuario->loadById(7);
-//$usuario->delete();
-echo $usuario;
+// $usuario = new Usuario();
+// $usuario->loadById(5);
+// //$usuario->delete();
+// echo $usuario;
  ?>
